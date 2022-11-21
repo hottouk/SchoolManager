@@ -3,17 +3,14 @@ package com.example.schoolmanager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolmanager.model.ItemActivity
-import com.example.schoolmanager.model.ItemStudent
+import com.example.schoolmanager.model.Student
 
 class StudentListRecyclerViewAdapter(
-    val studentList: List<ItemStudent>,
-    val itemClickListener: (ItemStudent) -> Unit
+    val studentList: List<Student>,
+    val itemClickListener: (Student) -> Unit
 ) :
     RecyclerView.Adapter<StudentListRecyclerViewAdapter.studentInfoViewHolder>() {
 
@@ -28,7 +25,7 @@ class StudentListRecyclerViewAdapter(
             studentDetailsBtn = itemView.findViewById(R.id.student_details_btn)
         }
 
-        fun bindView(student: ItemStudent) {
+        fun bindView(student: Student) {
             studentNumberTextView.text = student.studentNumber.toString()
             studentNameTextView.text = student.studentName
             studentDetailsBtn.setOnClickListener {

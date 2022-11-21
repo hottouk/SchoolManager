@@ -6,8 +6,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.schoolmanager.model.ItemStudent
+import com.example.schoolmanager.model.Student
 
 class StudentDetailActivity : AppCompatActivity() {
     private val studentNumber: TextView by lazy { findViewById(R.id.student_detail_number_textview) }
@@ -28,7 +27,7 @@ class StudentDetailActivity : AppCompatActivity() {
         ).build()
 
         //intent 받는 부분
-        val student = intent.getParcelableExtra<ItemStudent>(INTENT_EXTRA_ITEM)
+        val student = intent.getParcelableExtra<Student>(INTENT_EXTRA_ITEM)
 
         //뷰 그리기
         student?.let {
@@ -45,18 +44,18 @@ class StudentDetailActivity : AppCompatActivity() {
         }.start()
 
         //todo 정보 수정 버튼 클릭시 오류남 수정할것
-        studentDetailInfoEditBtn.setOnClickListener {
-            Thread {
-                db.studentDao().insertStudent(
-                    ItemStudent(
-                        studentNumber = student?.studentNumber ?: 0,
-                        studentName = student?.studentName ?: "이름",
-                        studentLevel = 0,
-                        studentDetailInfo = studentDetailInfoEditText.text.toString()
-                    )
-                )
-            }.start()
-        }
+//        studentDetailInfoEditBtn.setOnClickListener {
+//            Thread {
+//                db.studentDao().insertStudent(
+//                    Student(
+//                        studentNumber = student?.studentNumber ?: 0,
+//                        studentName = student?.studentName ?: "이름",
+//                        studentLevel = 0,
+//                        studentDetailInfo = studentDetailInfoEditText.text.toString()
+//                    )
+//                )
+//            }.start()
+//        }
     }
 
     companion object {

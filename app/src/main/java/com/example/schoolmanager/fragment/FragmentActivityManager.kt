@@ -12,7 +12,6 @@ import com.example.schoolmanager.ActivityDetailActivity
 import com.example.schoolmanager.R
 import com.example.schoolmanager.adapter.ActivityListRecyclerViewAdapter
 import com.example.schoolmanager.model.ItemActivity
-import com.example.schoolmanager.model.ItemStudent
 
 class FragmentActivityManager : Fragment() {
 
