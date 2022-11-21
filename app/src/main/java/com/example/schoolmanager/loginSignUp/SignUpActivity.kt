@@ -2,14 +2,12 @@ package com.example.schoolmanager.loginSignUp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.schoolmanager.ConstKey
+import com.example.schoolmanager.KeyValue
 import com.example.schoolmanager.R
 import com.example.schoolmanager.model.Student
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -18,22 +16,23 @@ import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
     //파이어베이스
-    val auth: FirebaseAuth by lazy { Firebase.auth }
-    var userDB: DatabaseReference? = null
+    private val auth: FirebaseAuth by lazy { Firebase.auth }
+    private var userDB: DatabaseReference? = null
 
     //UI 관련
-    val emailSignUpEditText: EditText by lazy { findViewById(R.id.email_sign_up_edittext) }
-    val passwordSignUpEditText: EditText by lazy { findViewById(R.id.password_sign_up_edittext) }
-    val studentNumberEditText: EditText by lazy { findViewById(R.id.student_number_edittext) }
-    val studentNameEditText: EditText by lazy { findViewById(R.id.student_name_edittext) }
-    val studentNicknameEditText: EditText by lazy { findViewById(R.id.student_nickname_edittext) }
-    val signUpBtn: Button by lazy { findViewById(R.id.sign_up_btn) }
+    private val emailSignUpEditText: EditText by lazy { findViewById(R.id.email_sign_up_edittext) }
+    private val passwordSignUpEditText: EditText by lazy { findViewById(R.id.password_sign_up_edittext) }
+    private val studentNumberEditText: EditText by lazy { findViewById(R.id.student_number_edittext) }
+    private val studentNameEditText: EditText by lazy { findViewById(R.id.student_name_edittext) }
+    private val studentNicknameEditText: EditText by lazy { findViewById(R.id.student_nickname_edittext) }
+    private val signUpBtn: Button by lazy { findViewById(R.id.sign_up_btn) }
 
     //---------------------------------------------------------------------------------------생명주기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        userDB = Firebase.database.reference.child(ConstKey.DB_USERS)
+        //DB 초기화
+        userDB = Firebase.database.reference.child(KeyValue.DB_USERS)
         clkSignUpBtn()
     }
 
@@ -51,6 +50,7 @@ class SignUpActivity : AppCompatActivity() {
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     saveUserInfo()
+                                    finish()
                                 }
                             }
                     } else {

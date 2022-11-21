@@ -63,8 +63,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     //로그인 체크
-    private fun checkLogIn() {
-        Log.d(ConstKey.LOG_TAG,"로그인 유저 아이디 : ${auth.currentUser}")
+    fun checkLogIn() {
+        Log.d(KeyValue.LOG_TAG,"로그인 유저 아이디 : ${auth.currentUser}")
         if (auth.currentUser == null) {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)

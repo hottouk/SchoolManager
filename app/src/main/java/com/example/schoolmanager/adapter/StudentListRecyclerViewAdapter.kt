@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.model.Student
 
 class StudentListRecyclerViewAdapter(
-    val studentList: List<Student>,
+    val studentList: MutableList<Student> = mutableListOf(),
     val itemClickListener: (Student) -> Unit
 ) :
     RecyclerView.Adapter<StudentListRecyclerViewAdapter.studentInfoViewHolder>() {
