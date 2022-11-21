@@ -59,7 +59,6 @@ class StudentDetailActivity : AppCompatActivity() {
         }
     }
 
-
     companion object {
         const val LOG_TAG = "studentM"
         const val INTENT_EXTRA_ITEM = "student"

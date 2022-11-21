@@ -11,22 +11,23 @@ import com.example.schoolmanager.R
 import com.example.schoolmanager.StudentDetailActivity
 import com.example.schoolmanager.StudentListRecyclerViewAdapter
 import com.example.schoolmanager.model.ItemStudent
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
-class FragmentStudentManager : Fragment() {
+class StudentManagerFragment : Fragment() {
 
+    //파이어베이스
+    private val auth: FirebaseAuth = Firebase.auth
+
+    //컨텐츠
     var studentList: MutableList<ItemStudent> = mutableListOf()
+    //UI 관련
     lateinit var studentListRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initTestData()
-    }
-
-    //임시 데이터 삽입 코드
-    private fun initTestData(){
-        for (i in 1..10) {
-            studentList.add(ItemStudent("301$i".toInt(), "$i 번째 학생", 1,"아무말아무말"))
-        }
     }
 
     override fun onCreateView(
@@ -43,5 +44,12 @@ class FragmentStudentManager : Fragment() {
             startActivity(intent)
         })
         return rootView
+    }
+
+    //임시 데이터 삽입 코드
+    private fun initTestData(){
+        for (i in 1..10) {
+            studentList.add(ItemStudent("301$i".toInt(), "$i 번째 학생", 1,"아무말아무말"))
+        }
     }
 }

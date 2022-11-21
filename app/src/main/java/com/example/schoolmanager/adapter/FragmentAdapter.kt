@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.schoolmanager.fragment.FragmentActivityManager
-import com.example.schoolmanager.fragment.FragmentStudentManager
+import com.example.schoolmanager.fragment.StudentManagerFragment
 
 class FragmentAdapter(fragmentActivity: FragmentActivity, val tabCount : Int) :
     FragmentStateAdapter(fragmentActivity) {
@@ -14,9 +14,9 @@ class FragmentAdapter(fragmentActivity: FragmentActivity, val tabCount : Int) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FragmentStudentManager()
+            0 -> StudentManagerFragment()
             1 -> FragmentActivityManager()
-            else -> FragmentStudentManager()
+            else -> StudentManagerFragment()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.schoolmanager.Dao
+package com.example.schoolmanager.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+    }
+
+    private fun initViews() {
+        tabLayout.addTab(tabLayout.newTab().setText("1번째"))
+        tabLayout.addTab(tabLayout.newTab().setText("활동 관리"))
+        tabLayout.addTab(tabLayout.newTab().setText("학생 관리"))
+        tabLayout.addTab(tabLayout.newTab().setText("4번째"))
 
         viewPager.adapter = FragmentAdapter(this,4)
 
@@ -34,12 +41,5 @@ class MainActivity : AppCompatActivity() {
                 tab?.let { viewPager.setCurrentItem(it.position) }
             }
         })
-    }
-
-    private fun initViews() {
-        tabLayout.addTab(tabLayout.newTab().setText("1번째"))
-        tabLayout.addTab(tabLayout.newTab().setText("활동 관리"))
-        tabLayout.addTab(tabLayout.newTab().setText("학생 관리"))
-        tabLayout.addTab(tabLayout.newTab().setText("4번째"))
     }
 }

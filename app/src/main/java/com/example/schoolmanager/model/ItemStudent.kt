@@ -13,4 +13,6 @@ data class ItemStudent(
     @ColumnInfo val studentName: String,
     @ColumnInfo val studentLevel : Int,
     @ColumnInfo val studentDetailInfo : String
-):Parcelable
+):Parcelable{
+    constructor():this(0,"",1,"")
+}
