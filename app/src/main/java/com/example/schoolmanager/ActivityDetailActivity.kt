@@ -2,10 +2,9 @@ package com.example.schoolmanager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import com.example.schoolmanager.model.ItemActivity
+import com.example.schoolmanager.model.SchoolActivity
 
 class ActivityDetailActivity : AppCompatActivity() {
     private val titleTextView: EditText by lazy { findViewById(R.id.activity_title_edittext) }
@@ -26,8 +25,8 @@ class ActivityDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         //intent 받는 부분
-        val itemActivity = intent.getParcelableExtra<ItemActivity?>(INTENT_EXTRA_ITEM)
-        itemActivity?.let {
+        val schoolActivity = intent.getParcelableExtra<SchoolActivity?>(INTENT_EXTRA_ITEM)
+        schoolActivity?.let {
             titleTextView.setText(it.activityTitle)
             simpleInfoEditText.setText(it.activitySimpleInfo)
             detailInfoEditText.setText(it.activityDetailInfo)

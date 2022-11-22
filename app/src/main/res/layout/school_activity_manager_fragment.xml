@@ -16,9 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteY="59dp"
-        tools:listitem="@layout/activity_row_item_layout">
+        tools:listitem="@layout/activity_row_item_layout"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/plus_floating_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_plus_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

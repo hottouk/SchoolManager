@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class ItemActivity(
+data class SchoolActivity(
     //기본사항
     @PrimaryKey val uid: Int,
     val activityTitle: String,

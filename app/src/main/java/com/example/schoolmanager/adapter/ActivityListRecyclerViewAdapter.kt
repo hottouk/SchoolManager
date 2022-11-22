@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolmanager.model.ItemActivity
+import com.example.schoolmanager.model.SchoolActivity
 import com.example.schoolmanager.R
 
 class ActivityListRecyclerViewAdapter(
-    private val activityList: List<ItemActivity>,
-    val itemClickListener: (ItemActivity) -> Unit
+    private val activityList: List<SchoolActivity>,
+    val itemClickListener: (SchoolActivity) -> Unit
 ) :
     RecyclerView.Adapter<ActivityListRecyclerViewAdapter.ActivitiesViewHolder>() {
 
@@ -36,7 +36,7 @@ class ActivityListRecyclerViewAdapter(
         private val inputDetailInfoBtn: AppCompatButton =
             itemView.findViewById(R.id.input_detail_Info_btn)
 
-        fun bind(activity: ItemActivity) {
+        fun bind(activity: SchoolActivity) {
             activityUidTextView.text = activity.uid.toString()
             activityTitleTextView.text = activity.activityTitle
 

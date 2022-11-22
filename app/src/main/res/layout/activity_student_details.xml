@@ -8,6 +8,7 @@
     tools:context=".ActivityDetailActivity">
 
     <TextView
+        android:background="@drawable/draw_bottom_line"
         android:id="@+id/student_detail_number_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:background="@drawable/draw_bottom_line"
         android:id="@+id/student_detail_name_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -37,11 +39,13 @@
         android:id="@+id/student_detail_character_imageview"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/ic_star"
+        android:src="@drawable/ic_star"
+        android:background="@drawable/draw_outlines"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/student_detail_number_textview" />
 
     <TextView
+        android:background="@drawable/draw_outlines"
         android:id="@+id/achieved_quest_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -52,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/student_detail_name_textview" />
 
     <ScrollView
+        android:background="@drawable/draw_outlines"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/table_layout"
@@ -68,6 +73,7 @@
 
 
     <TableLayout
+        android:background="@drawable/draw_outlines"
         android:id="@+id/table_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -152,8 +158,10 @@
         android:text="생기부 문구"
         app:layout_constraintBottom_toTopOf="@id/edit_student_info_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table_layout" />
+        app:layout_constraintTop_toBottomOf="@id/table_layout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/edit_student_info_btn"

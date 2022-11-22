@@ -73,6 +73,6 @@ class SignUpActivity : AppCompatActivity() {
             studentEmail = emailSignUpEditText.text.toString(),
             studentPassword = passwordSignUpEditText.text.toString()
         )
-        userDB?.child(auth.currentUser!!.uid)?.push()?.setValue(model)
+        userDB?.push()?.setValue(model)
     }
 }

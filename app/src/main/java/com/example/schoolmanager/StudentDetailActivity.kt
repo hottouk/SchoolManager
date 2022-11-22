@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.room.Room
+import com.example.schoolmanager.KeyValue.Companion.INTENT_EXTRA_ITEM
 import com.example.schoolmanager.model.Student
 
 class StudentDetailActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class StudentDetailActivity : AppCompatActivity() {
     private val studentDetailInfoEditText: EditText by lazy { findViewById(R.id.student_detail_info_edittext) }
     private val studentDetailInfoEditBtn: AppCompatButton by lazy { findViewById(R.id.edit_student_info_btn) }
     lateinit var db: AppDatabase
+    //---------------------------------------------------------------------------------------생명주기
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,22 +28,15 @@ class StudentDetailActivity : AppCompatActivity() {
             "studentInfoDB"
         ).build()
 
-        //intent 받는 부분
-        val student = intent.getParcelableExtra<Student>(INTENT_EXTRA_ITEM)
+        initViews() //뷰 그리기
 
-        //뷰 그리기
-        student?.let {
-            studentNumber.text = student.studentNumber.toString()
-            studentName.text = student.studentName
-            studentDetailInfoEditText.setText(it.studentDetailInfo)
-        }
-        Thread {//DB에서 받아온 정보 그리기
-            val savedStudentDetails =
-                db.studentDao().getOneStudent(student?.studentNumber ?: 0).studentDetailInfo
-            runOnUiThread {
-                studentDetailInfoEditText.setText(savedStudentDetails)
-            }
-        }.start()
+//        Thread {//DB에서 받아온 정보 그리기
+//            val savedStudentDetails =
+//                db.studentDao().getOneStudent(student?.studentNumber ?: 0).studentDetailInfo
+//            runOnUiThread {
+//                studentDetailInfoEditText.setText(savedStudentDetails)
+//            }
+//        }.start()
 
         //todo 정보 수정 버튼 클릭시 오류남 수정할것
 //        studentDetailInfoEditBtn.setOnClickListener {
@@ -58,8 +53,18 @@ class StudentDetailActivity : AppCompatActivity() {
 //        }
     }
 
-    companion object {
-        const val LOG_TAG = "studentM"
-        const val INTENT_EXTRA_ITEM = "student"
+    //--------------------------------------------------------------------------------------사용자함수
+    //뷰 초기화
+    private fun initViews(){
+        //intent 받는 부분
+        val student = intent.getParcelableExtra<Student>(INTENT_EXTRA_ITEM)
+
+        //뷰 그리기
+        student?.let {
+            studentNumber.text = student.studentNumber.toString()
+            studentName.text = student.studentName
+            studentDetailInfoEditText.setText(it.studentDetailInfo)
+        }
     }
+
 }
