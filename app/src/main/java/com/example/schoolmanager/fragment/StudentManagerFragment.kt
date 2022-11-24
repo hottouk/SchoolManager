@@ -35,6 +35,7 @@ class StudentManagerFragment : Fragment() {
                 model ?: return
                 studentList.add(model)
             }
+            //todo 어뎁터 초기화, 학생 중복 생성됨
             inputStudentDataIntoAdapter(studentList)
         }
 
@@ -58,11 +59,6 @@ class StudentManagerFragment : Fragment() {
         mainActivity = context as MainActivity
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(KeyValue.LOG_TAG, "Fragment: OnCreate")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,6 +70,8 @@ class StudentManagerFragment : Fragment() {
         userDB.addValueEventListener(valueEventListener) //FirebaseDB 에서 받아서 Recycler에 뿌린다.
         return rootView
     }
+
+
     //--------------------------------------------------------------------------------------사용자함수
 
     //학생 어뎁터에 데이터 삽입

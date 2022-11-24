@@ -19,4 +19,6 @@ data class SchoolActivity(
     val cooperation: Int,
     val sincerity: Int,
     val career: Int
-) : Parcelable
+) : Parcelable{
+    constructor():this(1,"","","",0,0,0,0,0)
+}

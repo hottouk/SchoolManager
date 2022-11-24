@@ -10,8 +10,8 @@ import com.example.schoolmanager.model.SchoolActivity
 import com.example.schoolmanager.R
 
 class ActivityListRecyclerViewAdapter(
-    private val activityList: List<SchoolActivity>,
-    val itemClickListener: (SchoolActivity) -> Unit
+    private val activityList: MutableList<SchoolActivity> = mutableListOf(),
+    val itemClickListener: (SchoolActivity) -> Unit ={}
 ) :
     RecyclerView.Adapter<ActivityListRecyclerViewAdapter.ActivitiesViewHolder>() {
 
