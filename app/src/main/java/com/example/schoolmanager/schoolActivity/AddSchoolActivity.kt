@@ -8,7 +8,7 @@ import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import com.example.schoolmanager.KeyValue
 import com.example.schoolmanager.R
-import com.example.schoolmanager.model.SchoolActivity
+import com.example.schoolmanager.model.SchoolWork
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -82,11 +82,11 @@ class AddSchoolActivity : AppCompatActivity() {
 
     //활동 정보 파베 DB 저장하기
     private fun saveSchoolAct() {
-        val model = SchoolActivity(
+        val model = SchoolWork(
             uid = 1,
-            activityTitle = schoolActTitleEditText.text.toString(),
-            activitySimpleInfo = schoolActSimpleEditText.text.toString(),
-            activityDetailInfo = schoolActDetailsEditText.text.toString(),
+            schoolWorkTitle = schoolActTitleEditText.text.toString(),
+            schoolWorkSimpleInfo = schoolActSimpleEditText.text.toString(),
+            schoolWorkDetailInfo = schoolActDetailsEditText.text.toString(),
             leadership = leadershipNumberPicker.value,
             academicAbility = academicNumberPicker.value,
             cooperation = cooperationNumberPicker.value,

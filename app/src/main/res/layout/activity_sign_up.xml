@@ -77,6 +77,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="35dp"
         android:text="회원가입"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/student_nickname_edittext" />

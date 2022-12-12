@@ -4,10 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.viewpager2.widget.ViewPager2
-import com.example.schoolmanager.adapter.FragmentAdapter
+import androidx.fragment.app.Fragment
+import com.example.schoolmanager.fragment.HomeFragment
+import com.example.schoolmanager.fragment.SchoolWorkManagerFragment
+import com.example.schoolmanager.fragment.StudentManagerFragment
 import com.example.schoolmanager.loginSignUp.LogInActivity
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,13 +20,9 @@ class MainActivity : AppCompatActivity() {
     val auth: FirebaseAuth by lazy { Firebase.auth }
 
     //UI관련
-    private val tabLayout: TabLayout by lazy {
-        findViewById(R.id.tab_layout)
+    private val bottomNavigationView: BottomNavigationView by lazy {
+        findViewById(R.id.bottom_navigation_view)
     }
-    val viewPager: ViewPager2 by lazy {
-        findViewById(R.id.view_pager)
-    }
-
     //---------------------------------------------------------------------------------------생명주기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,25 +38,30 @@ class MainActivity : AppCompatActivity() {
     //--------------------------------------------------------------------------------------사용자함수
     //뷰 초기화
     private fun initViews() {
-        tabLayout.addTab(tabLayout.newTab().setText("1번째"))
-        tabLayout.addTab(tabLayout.newTab().setText("활동 관리"))
-        tabLayout.addTab(tabLayout.newTab().setText("학생 관리"))
-        tabLayout.addTab(tabLayout.newTab().setText("4번째"))
+        val studentManagerFragment = StudentManagerFragment()
+        val schoolWorkManagerFragment = SchoolWorkManagerFragment()
+        val homeFragment = HomeFragment()
+        replaceFragment(homeFragment)
 
-        viewPager.adapter = FragmentAdapter(this, 4)
-
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab?.let { viewPager.setCurrentItem(it.position) }
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home_menu -> replaceFragment(homeFragment)
+                R.id.student_manager_menu->  replaceFragment(studentManagerFragment)
+                R.id.schoolwork_manager_menu->  replaceFragment(schoolWorkManagerFragment)
+                R.id.my_page_menu-> replaceFragment(schoolWorkManagerFragment)
             }
+            true
+        }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
+    }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                tab?.let { viewPager.setCurrentItem(it.position) }
+    //프래그먼트 교체
+    private fun replaceFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .apply {
+                replace(R.id.fragment_container,fragment)
+                commit()
             }
-        })
     }
 
     //로그인 체크

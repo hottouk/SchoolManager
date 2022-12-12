@@ -139,6 +139,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="저장"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

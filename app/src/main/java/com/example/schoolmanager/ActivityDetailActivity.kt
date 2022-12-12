@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import com.example.schoolmanager.model.SchoolActivity
+import com.example.schoolmanager.model.SchoolWork
 
 class ActivityDetailActivity : AppCompatActivity() {
     private val titleTextView: EditText by lazy { findViewById(R.id.activity_title_edittext) }
@@ -25,11 +25,11 @@ class ActivityDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         //intent 받는 부분
-        val schoolActivity = intent.getParcelableExtra<SchoolActivity?>(INTENT_EXTRA_ITEM)
-        schoolActivity?.let {
-            titleTextView.setText(it.activityTitle)
-            simpleInfoEditText.setText(it.activitySimpleInfo)
-            detailInfoEditText.setText(it.activityDetailInfo)
+        val schoolWork = intent.getParcelableExtra<SchoolWork?>(INTENT_EXTRA_ITEM)
+        schoolWork?.let {
+            titleTextView.setText(it.schoolWorkTitle)
+            simpleInfoEditText.setText(it.schoolWorkSimpleInfo)
+            detailInfoEditText.setText(it.schoolWorkDetailInfo)
         }
     }
 

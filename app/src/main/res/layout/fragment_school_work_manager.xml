@@ -7,16 +7,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_list_recyclerview"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="59dp"
-        tools:listitem="@layout/activity_row_item_layout"/>
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_school_work" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plus_floating_btn"
