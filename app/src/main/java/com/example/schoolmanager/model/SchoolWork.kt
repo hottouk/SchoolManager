@@ -9,25 +9,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class SchoolWork(
     //기본사항
-    @PrimaryKey val uid: Int,
-    val schoolWorkTitle: String,
+    @PrimaryKey val schoolWorkTitle: String,
     val schoolWorkSimpleInfo: String,
     val schoolWorkDetailInfo: String,
-    //점수
     val leadership: Int,
     val academicAbility: Int,
     val cooperation: Int,
     val sincerity: Int,
-    val career: Int,
-) : Parcelable{
-    constructor():this(1,"","","",0,0,0,0,0)
-    private fun getTotalScore(
-        leadership: Int,
-        academicAbility: Int,
-        cooperation: Int,
-        sincerity: Int,
-        career: Int
-    ): Int {
-        return (leadership + academicAbility + cooperation + sincerity + career)
-    }
+    val career: Int
+) : Parcelable {
+    constructor() : this("", "", "", 0, 0, 0, 0, 0)
 }

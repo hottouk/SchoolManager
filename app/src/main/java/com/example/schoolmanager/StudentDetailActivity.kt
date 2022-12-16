@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.room.Room
-import com.example.schoolmanager.KeyValue.Companion.INTENT_EXTRA_ITEM
+import com.example.schoolmanager.util.KeyValue.Companion.INTENT_EXTRA_STUDENT
 import com.example.schoolmanager.model.Student
 
 class StudentDetailActivity : AppCompatActivity() {
@@ -57,7 +57,7 @@ class StudentDetailActivity : AppCompatActivity() {
     //뷰 초기화
     private fun initViews(){
         //intent 받는 부분
-        val student = intent.getParcelableExtra<Student>(INTENT_EXTRA_ITEM)
+        val student = intent.getParcelableExtra<Student>(INTENT_EXTRA_STUDENT)
 
         //뷰 그리기
         student?.let {

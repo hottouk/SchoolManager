@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/schoolwork_palette_container"
+    android:layout_width="160dp"
     android:layout_height="match_parent"
-    android:layout_marginStart="30dp"
-    android:layout_marginEnd="30dp"
-    android:background="@color/white"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     app:cardCornerRadius="16dp"
     tools:layout_height="100dp">
 
@@ -15,15 +15,15 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/schoolwork_thumb_nail_viewpager2_imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/schoolwork_thumb_nail_palette_imageview"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/schoolwork_title_viewpager2_textview"
+            android:id="@+id/schoolwork_title_palette_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -32,12 +32,12 @@
             android:maxLines="2"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/schoolwork_thumb_nail_viewpager2_imageview"
+            app:layout_constraintStart_toEndOf="@id/schoolwork_thumb_nail_palette_imageview"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="단어시험 통과" />
 
         <TextView
-            android:id="@+id/school_work_info_viewpager2_textview"
+            android:id="@+id/school_work_info_palette_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -46,8 +46,8 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/schoolwork_thumb_nail_viewpager2_imageview"
-            app:layout_constraintTop_toBottomOf="@id/schoolwork_title_viewpager2_textview"
+            app:layout_constraintStart_toEndOf="@id/schoolwork_thumb_nail_palette_imageview"
+            app:layout_constraintTop_toBottomOf="@id/schoolwork_title_palette_textview"
             tools:text="단어 20개를 통과하였다" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

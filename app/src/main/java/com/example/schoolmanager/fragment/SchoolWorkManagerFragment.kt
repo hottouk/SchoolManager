@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.*
 import com.example.schoolmanager.adapter.SchoolWorkRecyclerViewAdapter
 import com.example.schoolmanager.model.SchoolWork
-import com.example.schoolmanager.schoolActivity.AddSchoolActivity
+import com.example.schoolmanager.schoolWork.AddSchoolWork
+import com.example.schoolmanager.util.KeyValue
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
 class SchoolWorkManagerFragment : Fragment(R.layout.fragment_school_work_manager) {
 
@@ -33,7 +32,7 @@ class SchoolWorkManagerFragment : Fragment(R.layout.fragment_school_work_manager
     //활동DB
     private val schoolWorkDB: DatabaseReference by lazy { Firebase.database.reference.child(KeyValue.DB_SCHOOL_ACTIVITIES) }
     private val schoolWorkValueEventListener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {//데이터 변경시 DB에서 받아오기
+        override fun onDataChange(snapshot: DataSnapshot) {//데이터 받는 부분
             snapshot.children.forEach { schoolWork ->
                 val model = schoolWork.getValue(SchoolWork::class.java)
                 model ?: return
@@ -55,9 +54,7 @@ class SchoolWorkManagerFragment : Fragment(R.layout.fragment_school_work_manager
     //UI 관련
     private lateinit var schoolWorkRecyclerView: RecyclerView
     private lateinit var schoolWorkRecyclerViewAdapter: SchoolWorkRecyclerViewAdapter
-    //드래그앤드랍
-    private val itemTouchSimpleCallback = ItemTouchSimpleCallback()
-    private val itemTouchHelper = ItemTouchHelper(itemTouchSimpleCallback)
+
 
     //---------------------------------------------------------------------------------------생명주기
     override fun onAttach(context: Context) {
@@ -106,7 +103,7 @@ class SchoolWorkManagerFragment : Fragment(R.layout.fragment_school_work_manager
     //활동 추가 버튼 클릭
     private fun clkPlusActivityBtn(rootView: View) {
         rootView.findViewById<FloatingActionButton>(R.id.plus_floating_btn).setOnClickListener {
-            val intent = Intent(context, AddSchoolActivity::class.java)
+            val intent = Intent(context, AddSchoolWork::class.java)
             startActivity(intent)
         }
     }
@@ -120,27 +117,12 @@ class SchoolWorkManagerFragment : Fragment(R.layout.fragment_school_work_manager
                     intent.putExtra(INTENT_EXTRA_ITEM, it)
                     startActivity(intent)
                 })
-        enableDragAndDrop(adapter)
-        schoolWorkRecyclerView.adapter = adapter
+       schoolWorkRecyclerView.adapter = adapter
         adapter.submitList(schoolWorkList)
     }
 
-    //드래그 앤 드랍 코드
-    private fun enableDragAndDrop(adapter : SchoolWorkRecyclerViewAdapter){
-        itemTouchSimpleCallback.setOnItemMoveListener(object : ItemTouchSimpleCallback.OnItemMoveListener {
-            override fun onItemMove(from: Int, to: Int) {
-                Log.d(KeyValue.LOG_TAG, "from Position : $from, to Position : $to")
 
-                // userList에도 값이 변하는 걸 원한다면 Collections.swap으로 변경
-                Collections.swap(schoolWorkList, from, to)
 
-                // userList != adapter.differ.currentList
-                // adapter.differ.currentList는 계속 값을 변경했지만 userList는 변경 전 값(왜냐면 우리는 변경한적이 없다.)
-                Log.d(KeyValue.LOG_TAG, "userList: $schoolWorkList")
-            }
-        })
-        itemTouchHelper.attachToRecyclerView(schoolWorkRecyclerView)
-    }
 
     companion object {
         const val INTENT_EXTRA_ITEM = "itemActivity"

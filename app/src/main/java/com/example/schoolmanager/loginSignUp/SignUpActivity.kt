@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.schoolmanager.KeyValue
+import com.example.schoolmanager.util.KeyValue
 import com.example.schoolmanager.R
 import com.example.schoolmanager.model.Student
 import com.google.firebase.auth.FirebaseAuth

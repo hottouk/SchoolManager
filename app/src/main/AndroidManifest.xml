@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SchoolManager"
         tools:targetApi="31">
         <activity
-            android:name=".schoolActivity.AddSchoolActivity"
+            android:name=".schoolWork.AddSchoolWork"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

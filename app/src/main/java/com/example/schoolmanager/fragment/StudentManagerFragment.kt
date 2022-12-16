@@ -1,19 +1,22 @@
 package com.example.schoolmanager.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.*
 import com.example.schoolmanager.adapter.SchoolWorkPaletteRecyclerViewAdapter
+import com.example.schoolmanager.adapter.SchoolWorkRecyclerViewAdapter
+import com.example.schoolmanager.databinding.FragmentStudentManagerBinding
 import com.example.schoolmanager.model.SchoolWork
 import com.example.schoolmanager.model.Student
+import com.example.schoolmanager.util.KeyValue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -38,7 +41,7 @@ class StudentManagerFragment : Fragment(R.layout.fragment_student_manager) {
                 model ?: return
                 studentList.add(model)
             }
-            inputStudentDataIntoAdapter(studentList)
+            setStudentAdapter(studentList)
         }
 
         override fun onCancelled(error: DatabaseError) {
@@ -54,7 +57,7 @@ class StudentManagerFragment : Fragment(R.layout.fragment_student_manager) {
                 model ?: return
                 schoolWorkList.add(model)
             }
-            inputSchoolWorkDataIntoAdapter(schoolWorkList)
+            setPaletteAdapter(schoolWorkList)
         }
 
         override fun onCancelled(error: DatabaseError) {
@@ -63,26 +66,35 @@ class StudentManagerFragment : Fragment(R.layout.fragment_student_manager) {
 
     //context
     lateinit var mainActivity: MainActivity
+    private var mBinding: FragmentStudentManagerBinding? = null
+    private val binding get() = mBinding!!
 
     //학생, 활동 목록
     var studentList: MutableList<Student> = mutableListOf()
     val schoolWorkList: MutableList<SchoolWork> = mutableListOf()
 
-    //UI 관련
+    //리사이클러뷰 어댑터
     private lateinit var studentRecyclerView: RecyclerView
-    private val studentRecyclerViewAdapter: StudentRecyclerViewAdapter by lazy {
-        StudentRecyclerViewAdapter()
-    }
+    private val  studentRecyclerViewAdapter = StudentRecyclerViewAdapter()
+
     private lateinit var schoolWorkPalette: RecyclerView
     private val schoolWorkPaletteRecyclerViewAdapter: SchoolWorkPaletteRecyclerViewAdapter by lazy {
         SchoolWorkPaletteRecyclerViewAdapter()
     }
+    //팔레트 클릭 변수들
+    private var isPaletteOn = false
+    private var isSchoolWorkSelected = false
+        set(value) {
+            studentRecyclerViewAdapter.isSchoolWorkSelected = value
+            studentRecyclerViewAdapter.notifyDataSetChanged()
+            field = value
+        }
 
 
     //---------------------------------------------------------------------------------------생명주기
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d(KeyValue.LOG_TAG, "Fragment: OnAttach")
+        Log.d(KeyValue.LOG_TAG, "학생 관리 Fragment: OnAttach")
         mainActivity = context as MainActivity
     }
 
@@ -91,42 +103,79 @@ class StudentManagerFragment : Fragment(R.layout.fragment_student_manager) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_student_manager, container, false)
-
-        //UI 관련
-        studentRecyclerView = rootView.findViewById(R.id.student_list_recyclerview)
-        schoolWorkPalette = rootView.findViewById(R.id.schoolwork_palette_in_students_recyclerview)
+        Log.d(KeyValue.LOG_TAG, "학생 관리 Fragment: OnCreateView")
+        mBinding = FragmentStudentManagerBinding.inflate(inflater, container, false)
         initView() //뷰 초기화
-        //데이터 받아오기
-        userDB.addValueEventListener(userDbValueEventListener) //FirebaseDB 에서 받아서 Recycler에 뿌린다.
+        bindViews()
+
+        userDB.addValueEventListener(userDbValueEventListener) //FirebaseDB 데이터 받아서 RecyclerV에 뿌린다.
         schoolActDB.addValueEventListener(schoolWorkDbValueEventListener)
-        return rootView
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        Log.d(KeyValue.LOG_TAG, "학생 관리 Fragment: OnDestroy")
+        super.onDestroy()
+        mBinding = null
     }
 
     //--------------------------------------------------------------------------------------사용자함수
     private fun initView() {
         studentRecyclerViewAdapter
+        schoolWorkPaletteRecyclerViewAdapter
         studentList.clear()
+        schoolWorkList.clear()
+        isSchoolWorkSelected = false
     }
 
-    //학생 어뎁터에 데이터 삽입
-    private fun inputStudentDataIntoAdapter(studentList: MutableList<Student>) {
-        val adapter = StudentRecyclerViewAdapter(
-            itemClickListener = {
-                val intent = Intent(activity, StudentDetailActivity::class.java)
-                intent.putExtra("student", it)
-                startActivity(intent)
-            })
+    private fun bindViews() {
+        studentRecyclerView = binding.studentListRecyclerview
+        schoolWorkPalette = binding.schoolworkPalette
+        binding.giveExpBtn.setOnClickListener {
+            paletteOnOff()
+        }
+        binding.selectionWorkCompleteBtn.setOnClickListener { //활동 선택 완료
+            paletteOnOff()
+            isSchoolWorkSelected = true
+            showStudentSelectionBox(binding)
+        }
+    }
+
+    private fun showStudentSelectionBox(binding: FragmentStudentManagerBinding) {
+        binding.selectedStudentsDialogueLayout.isVisible = true
+        binding.selectionStudentCompleteBtn.setOnClickListener {
+            putWorkInfoIntoStudent()
+        }
+    }
+
+    private fun putWorkInfoIntoStudent() {
+        val selectedStudents = studentRecyclerViewAdapter.getSelectedStudents()
+        val selectedSchoolWorks = schoolWorkPaletteRecyclerViewAdapter.getSelectedSchoolWorks()
+        Log.d(KeyValue.LOG_TAG, "선택된 활동: $selectedSchoolWorks")
+        Log.d(KeyValue.LOG_TAG, "선택된 학생: $selectedStudents")
+    }
+
+    private fun paletteOnOff() {
+        isPaletteOn = !isPaletteOn
+        binding.selectionWorkCompleteBtn.isVisible = isPaletteOn
+        schoolWorkPalette.isVisible = isPaletteOn
+    }
+
+    //학생 어뎁터 데이터 세팅
+    private fun setStudentAdapter(studentList: MutableList<Student>) {
+        val adapter = studentRecyclerViewAdapter
         studentRecyclerView.adapter = adapter
         adapter.submitList(studentList)
     }
 
-    //뷰페이져에 데이터 삽입
-    private fun inputSchoolWorkDataIntoAdapter(schoolWorkList: MutableList<SchoolWork>) {
-        Log.d(KeyValue.LOG_TAG, "schoolWorkList: ${schoolWorkList.toString()}")
-        val adapter = SchoolWorkPaletteRecyclerViewAdapter(
-            schoolWorkList
-        )
+    //팔레트 어뎁터 데이터 세팅
+    private fun setPaletteAdapter(schoolWorkList: MutableList<SchoolWork>) {
+        val adapter = schoolWorkPaletteRecyclerViewAdapter
+        adapter.setOnItemClickListener {
+            binding.selectionWorkCompleteBtn.isEnabled =
+                adapter.getNumberOfSelectedSchoolWorks() > 0
+        }
         schoolWorkPalette.adapter = adapter
+        adapter.submitList(schoolWorkList)
     }
 }

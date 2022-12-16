@@ -25,7 +25,7 @@ class SchoolWorkRecyclerViewAdapter(
             itemView.findViewById(R.id.activity_title_textview)
 
         fun bindViews(schoolWork: SchoolWork) {
-            schoolWorkUidTextView.text = schoolWork.uid.toString()
+            schoolWorkUidTextView.text = schoolWork.toString()
             schoolWorkTitleTextView.text = schoolWork.schoolWorkTitle
         }
     }
@@ -44,7 +44,7 @@ class SchoolWorkRecyclerViewAdapter(
     companion object {
         val differCallBack = object : DiffUtil.ItemCallback<SchoolWork>() {
             override fun areItemsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
-                return oldItem.uid == newItem.uid
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
