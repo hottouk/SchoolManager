@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_marginVertical="2dp"
     android:background="@drawable/student_background">
 
     <TextView
-        android:id="@+id/id_activity_number_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
-
-    <TextView
-        android:id="@+id/activity_title_textview"
+        android:id="@+id/school_work_title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="활동제목"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/id_activity_number_textview"
-        app:layout_constraintStart_toEndOf="@id/id_activity_number_textview"
-        app:layout_constraintTop_toTopOf="@id/id_activity_number_textview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/score_area_layout"
@@ -35,7 +23,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/activity_title_textview"
+        app:layout_constraintStart_toEndOf="@id/school_work_title_textview"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

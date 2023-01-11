@@ -1,4 +1,4 @@
-package com.example.schoolmanager.adapter
+package com.example.schoolmanager.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.R
 import com.example.schoolmanager.databinding.ItemSchoolWorkPaletteBinding
-import com.example.schoolmanager.model.SchoolWork
+import com.example.schoolmanager.model.network.SchoolWork
 
 class SchoolWorkPaletteRecyclerViewAdapter :
     ListAdapter<SchoolWork, SchoolWorkPaletteRecyclerViewAdapter.SchoolWorkPaletteHolder>(
@@ -21,12 +21,9 @@ class SchoolWorkPaletteRecyclerViewAdapter :
     inner class SchoolWorkPaletteHolder(private val binding: ItemSchoolWorkPaletteBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val schoolWorkTitleTextView = binding.schoolworkTitlePaletteTextview
-        private val schoolWorkSimpleInfo: TextView = binding.schoolWorkInfoPaletteTextview
-
         fun bindViews(schoolWork: SchoolWork) {
-            schoolWorkTitleTextView.text = schoolWork.schoolWorkTitle
-            schoolWorkSimpleInfo.text = schoolWork.schoolWorkSimpleInfo
+            binding.schoolworkTitlePaletteTextview.text = schoolWork.schoolWorkTitle
+            binding.schoolWorkInfoPaletteTextview.text = schoolWork.schoolWorkSimpleInfo
 
             binding.root.setOnClickListener {
                 applySelection(binding, schoolWork)
@@ -85,4 +82,5 @@ class SchoolWorkPaletteRecyclerViewAdapter :
 
     fun getNumberOfSelectedSchoolWorks() = selectedSchoolWorks.size
     fun getSelectedSchoolWorks() = selectedSchoolWorks
+    fun releaseSelection() = selectedSchoolWorks.clear()
 }

@@ -1,19 +1,18 @@
 package com.example.schoolmanager
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.databinding.ItemStudentBinding
-import com.example.schoolmanager.model.Student
+import com.example.schoolmanager.model.network.Student
 
 class StudentRecyclerViewAdapter() :
     ListAdapter<Student, StudentRecyclerViewAdapter.StudentInfoViewHolder>(differCallback) {
 
-    private var onItemClickListener: ((Student) -> Unit)? = null //리스너
+    private var itemClickListener: ((Student) -> Unit)? = null //리스너
     private var selectedStudents: MutableList<Student> = mutableListOf() //클릭된 아이템 넣는 변수
     var isSchoolWorkSelected: Boolean = false
 
@@ -24,16 +23,21 @@ class StudentRecyclerViewAdapter() :
             with(binding) {
                 studentNumberContentTextview.text = student.studentNumber.toString()
                 studentNameContentTextview.text = student.studentName
+                studentLevelContentTextview.text = student.getExp().toString()
 
                 if (isSchoolWorkSelected) {
-                    getExpBtn.isEnabled = isSchoolWorkSelected
-                    getExpBtn.isVisible = isSchoolWorkSelected
-                    checkBox.isVisible = isSchoolWorkSelected
-                }
-                binding.getExpBtn.setOnClickListener {
-                    if (isSchoolWorkSelected) {
+                    getExpBtn.isEnabled = true
+                    getExpBtn.visibility = View.VISIBLE
+                    checkBox.visibility = View.VISIBLE
+                    getExpBtn.setOnClickListener {
                         applySelection(binding, student)
-                        onItemClickListener?.let { it(Student()) } //외부 리스너 연결
+                    }
+                } else {
+                    getExpBtn.isEnabled = false
+                    getExpBtn.visibility = View.GONE
+                    checkBox.visibility = View.GONE
+                    root.setOnClickListener {
+                        itemClickListener?.let { it(student) } //외부 리스너 설정
                     }
                 }
             }
@@ -79,9 +83,11 @@ class StudentRecyclerViewAdapter() :
 
     //외부 참조 함수
     fun setOnItemClickListener(listener: (Student) -> Unit) {
-        onItemClickListener = listener
+        itemClickListener = listener
     }
+
     fun getNumberOfSelectedStudents() = selectedStudents.size
     fun getSelectedStudents() = selectedStudents
+    fun releaseSelection() = selectedStudents.clear()
 }
 

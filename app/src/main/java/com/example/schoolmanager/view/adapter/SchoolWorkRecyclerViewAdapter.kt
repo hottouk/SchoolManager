@@ -1,39 +1,37 @@
-package com.example.schoolmanager.adapter
+package com.example.schoolmanager.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schoolmanager.model.SchoolWork
-import com.example.schoolmanager.R
+import com.example.schoolmanager.model.network.SchoolWork
+import com.example.schoolmanager.databinding.ItemSchoolWorkBinding
 
-class SchoolWorkRecyclerViewAdapter(
-    val itemClickListener: (SchoolWork) -> Unit = {}
-) :
+class SchoolWorkRecyclerViewAdapter() :
     ListAdapter<SchoolWork, SchoolWorkRecyclerViewAdapter.SchoolWorksViewHolder>(differCallBack) {
 
-    inner class SchoolWorksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //활동제목
-        private val schoolWorkUidTextView: TextView =
-            itemView.findViewById(R.id.id_activity_number_textview)
-        private val schoolWorkTitleTextView: TextView =
-            itemView.findViewById(R.id.activity_title_textview)
+    var itemClickListener: ((SchoolWork) -> Unit)? = null
+
+    inner class SchoolWorksViewHolder(private val binding: ItemSchoolWorkBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bindViews(schoolWork: SchoolWork) {
-            schoolWorkUidTextView.text = schoolWork.toString()
-            schoolWorkTitleTextView.text = schoolWork.schoolWorkTitle
+            with(binding) {
+                schoolWorkTitleTextview.text = schoolWork.schoolWorkTitle
+                schoolWorkSimpleInfoTextview.text = schoolWork.schoolWorkSimpleInfo
+                totalScoreTextview.text = schoolWork.getTotalScore().toString()
+                root.setOnClickListener {
+                    itemClickListener?.let { it(schoolWork)}
+                }
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchoolWorksViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val schoolWorkItemView = inflater.inflate(R.layout.item_school_work, parent, false)
-        return SchoolWorksViewHolder(schoolWorkItemView)
+        val itemView = ItemSchoolWorkBinding.inflate(inflater, parent, false)
+        return SchoolWorksViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: SchoolWorksViewHolder, position: Int) {
@@ -51,6 +49,10 @@ class SchoolWorkRecyclerViewAdapter(
                 return oldItem == newItem
             }
         }
+    }
+    //외부 참조 함수
+    fun setOnItemClickListener(listener: (SchoolWork) -> Unit) {
+        itemClickListener = listener
     }
 }
 

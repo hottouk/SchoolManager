@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDetailActivity">
+    tools:context=".view.schoolwork.SchoolWorkDetailActivity">
 
     <TextView
-        android:background="@drawable/draw_bottom_line"
         android:id="@+id/student_detail_number_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/draw_bottom_line"
         android:gravity="center"
         android:padding="5dp"
         android:text="학번"
@@ -21,10 +21,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:background="@drawable/draw_bottom_line"
         android:id="@+id/student_detail_name_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/draw_bottom_line"
         android:gravity="center"
         android:padding="5dp"
         android:text="학생이름"
@@ -38,16 +38,16 @@
         android:id="@+id/student_detail_character_imageview"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ic_star"
         android:background="@drawable/draw_outlines"
+        android:src="@drawable/ic_star"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/student_detail_number_textview" />
 
     <TextView
-        android:background="@drawable/draw_outlines"
         android:id="@+id/achieved_quest_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/draw_outlines"
         android:gravity="center"
         android:text="달성 퀘스트 목록"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +55,9 @@
         app:layout_constraintTop_toBottomOf="@id/student_detail_name_textview" />
 
     <ScrollView
-        android:background="@drawable/draw_outlines"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/draw_outlines"
         app:layout_constraintBottom_toTopOf="@id/table_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/student_detail_character_imageview"
@@ -65,17 +65,17 @@
 
         <TextView
             android:id="@+id/student_achieved_quest_textview"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="성취한 업적들" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="성취한 업적들" />
     </ScrollView>
 
 
     <TableLayout
-        android:background="@drawable/draw_outlines"
         android:id="@+id/table_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/draw_outlines"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/student_detail_character_imageview">
@@ -88,7 +88,7 @@
                 android:text="리더십" />
 
             <TextView
-                android:id="@+id/leadership_student_score_edittext"
+                android:id="@+id/leadership_student_score_textview"
                 android:layout_weight="1"
                 android:text="10" />
 
@@ -164,13 +164,15 @@
 
     <Button
         android:id="@+id/edit_student_info_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="정보 수정"
-        android:textColor="@color/black"
         android:backgroundTint="@color/teal_200"
+        android:text="정보 수정"
+        android:layout_marginHorizontal="10dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

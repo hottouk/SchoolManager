@@ -9,11 +9,12 @@
         android:id="@+id/action_bar"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:text="@string/student_management"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

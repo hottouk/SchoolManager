@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginSignUp.LogInActivity">
+    tools:context=".view.intro.LogInActivity">
 
     <EditText
         android:id="@+id/email_edittext"
@@ -37,9 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/teal_200"
         android:text="로그인"
         android:textColor="@color/black"
-        android:backgroundTint="@color/teal_200"
         app:layout_constraintEnd_toStartOf="@id/move_sign_up_page_btn"
         app:layout_constraintTop_toBottomOf="@id/password_edittext" />
 
@@ -48,11 +48,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="회원가입"
         android:backgroundTint="@color/teal_200"
+        android:text="회원가입"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/login_btn" />
 
+    <ImageView
+        android:id="@+id/kakao_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_medium_narrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

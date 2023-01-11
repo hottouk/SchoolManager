@@ -4,4 +4,24 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="give_experience">경험치 제공</string>
     <string name="student_management">학생 관리</string>
+    <string name="school_work_title">활동 제목</string>
+    <string name="school_work_simple_info">간단한 설명</string>
+    <string name="ability_leadership">리더십</string>
+    <string name="ability_academical">학업력</string>
+    <string name="ability_cooperation">협동성</string>
+    <string name="ability_career">진로</string>
+    <string name="ability_sincerity">성실성</string>
+    <string name="exp_sum">총합</string>
+    <string name="school_work_detail_info">생기부 문구</string>
+    <string name="school_work_edit_info">정보 수정</string>
+    <string name="save_btn">저장</string>
+    <string name="action_bar_title_work_management">활동 관리</string>
+    <string name="action_bar_title_work_edit">활동 수정</string>
+    <string name="action_bar_title_new_work">활동 저장</string>
+    <string name="kakao_native_app_key">b8eb07a6be89dd7b0179a198856b54db</string>
+    <string name="kakao_app_key">kakaob8eb07a6be89dd7b0179a198856b54db</string>
+    <string name="naver_client_id">TECojU6C7c5ePolWpAiZ</string>
+    <string name="naver_client_secret">LQqJZwmnzi</string>
+    <string name="naver_client_name">네이버아이디 로그인</string>
+
 </resources>

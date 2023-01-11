@@ -1,4 +1,4 @@
-package com.example.schoolmanager.fragment
+package com.example.schoolmanager.view.main
 
 import androidx.fragment.app.Fragment
 import com.example.schoolmanager.R

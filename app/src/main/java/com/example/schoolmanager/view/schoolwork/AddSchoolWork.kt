@@ -1,43 +1,44 @@
-package com.example.schoolmanager.schoolWork
+package com.example.schoolmanager.view.schoolwork
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.NumberPicker
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
 import com.example.schoolmanager.util.KeyValue
 import com.example.schoolmanager.R
 import com.example.schoolmanager.databinding.ActivityAddSchoolBinding
-import com.example.schoolmanager.model.SchoolWork
+import com.example.schoolmanager.model.network.SchoolWork
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class AddSchoolWork : AppCompatActivity() {
-    private lateinit var binding: ActivityAddSchoolBinding
 
-    //파이어베이스
-    private val schoolActDB: DatabaseReference by lazy { Firebase.database.reference.child(KeyValue.DB_SCHOOL_ACTIVITIES) }
-
-    //UI관련
-    private val schoolActTitleEditText: EditText by lazy { findViewById(R.id.school_activity_title_edittext) }
-    private val schoolActSimpleEditText: EditText by lazy { findViewById(R.id.school_activity_simpleInfo_edittext) }
-    private val schoolActDetailsEditText: EditText by lazy { findViewById(R.id.school_activity_detail_edittext) }
+    private val viewModel : SchoolWorkViewModel by viewModels()
+    private var mBinding: ActivityAddSchoolBinding? = null
+    private val binding get() = mBinding!!
 
     //---------------------------------------------------------------------------------------생명주기
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddSchoolBinding.inflate(layoutInflater)
+        mBinding = ActivityAddSchoolBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bindViews()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding = null
     }
 
     //--------------------------------------------------------------------------------------사용자함수
 
     private fun bindViews() {
         with(binding) {
-            //넘버피커 초기화
             val numberPickerList: List<NumberPicker> = mutableListOf(
                 leadershipNumberpicker,
                 academicNumberpicker,
@@ -47,21 +48,14 @@ class AddSchoolWork : AppCompatActivity() {
             )
             numberPickerList.forEach {
                 with(it) {
-                    maxValue = 10
+                    maxValue = 5
                     minValue = 0
                 }
             }
-            //버튼 초기화
+            //버튼
             schoolActivitySaveBtn.setOnClickListener {
                 showPopUp()
             }
-        }
-    }
-
-    //전역변수 바인딩의 초기화 여부 체크
-    private fun checkBinding(){
-        if(::binding.isInitialized.not()){
-            binding = ActivityAddSchoolBinding.inflate(layoutInflater)
         }
     }
 
@@ -71,7 +65,7 @@ class AddSchoolWork : AppCompatActivity() {
             .setTitle("저장 확인")
             .setMessage("입력한 활동을 저장하시겠습니까?")
             .setPositiveButton("저장") { _, _ ->
-                saveSchoolAct()
+                viewModel.postSchoolWork(binding)
                 finish()
             }
             .setNegativeButton("취소") { dialog, _ ->
@@ -79,21 +73,5 @@ class AddSchoolWork : AppCompatActivity() {
             }
             .create()
             .show()
-    }
-
-    //활동 정보 파이어베스 실시간 DB 저장하기
-    private fun saveSchoolAct() {
-        checkBinding()
-        val model = SchoolWork(
-            schoolWorkTitle = schoolActTitleEditText.text.toString(),
-            schoolWorkSimpleInfo = schoolActSimpleEditText.text.toString(),
-            schoolWorkDetailInfo = schoolActDetailsEditText.text.toString(),
-            leadership = binding.leadershipNumberpicker.value,
-            academicAbility = binding.academicNumberpicker.value,
-            cooperation =binding.cooperationNumberpicker.value,
-            sincerity = binding.sincerityNumberpicker.value,
-            career = binding.careerNumberpicker.value
-        )
-        schoolActDB?.push()?.setValue(model)
     }
 }
