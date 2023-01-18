@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:text="@string/action_bar_title_work_management"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

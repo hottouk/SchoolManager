@@ -1,11 +1,11 @@
-package com.example.schoolmanager.db
+package com.example.schoolmanager.model.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.schoolmanager.db.dao.StudentDao
-import com.example.schoolmanager.db.entity.StudentEntity
+import com.example.schoolmanager.model.db.dao.StudentDao
+import com.example.schoolmanager.model.db.entity.StudentEntity
 import com.example.schoolmanager.util.KeyValue
 
 @Database(entities = [StudentEntity::class], version = 2)

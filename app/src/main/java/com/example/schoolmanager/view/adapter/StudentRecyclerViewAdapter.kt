@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.schoolmanager.databinding.ItemStudentBinding
 import com.example.schoolmanager.model.network.Student
 
@@ -13,7 +14,7 @@ class StudentRecyclerViewAdapter() :
     ListAdapter<Student, StudentRecyclerViewAdapter.StudentInfoViewHolder>(differCallback) {
 
     private var itemClickListener: ((Student) -> Unit)? = null //리스너
-    private var selectedStudents: MutableList<Student> = mutableListOf() //클릭된 아이템 넣는 변수
+    private var selectedStudents: MutableList<Student> = mutableListOf() //선택 학생 넣는 변수
     var isSchoolWorkSelected: Boolean = false
 
     inner class StudentInfoViewHolder(private val binding: ItemStudentBinding) :
@@ -21,9 +22,14 @@ class StudentRecyclerViewAdapter() :
 
         fun bindViews(student: Student) {
             with(binding) {
-                studentNumberContentTextview.text = student.studentNumber.toString()
-                studentNameContentTextview.text = student.studentName
-                studentLevelContentTextview.text = student.getExp().toString()
+                studentNumberContentTextview.text = student.studentNumber
+                studentNameContentTextview.text = student.userName
+                studentLevelContentTextview.text = student.studentLevel.toString()
+                if(student.userProfileImageUrl != ""){
+                    Glide.with(binding.root)
+                        .load(student.userProfileImageUrl)
+                        .into(binding.studentCharacterImageview)
+                }
 
                 if (isSchoolWorkSelected) {
                     getExpBtn.isEnabled = true
@@ -54,14 +60,14 @@ class StudentRecyclerViewAdapter() :
     }
 
     override fun onBindViewHolder(holder: StudentInfoViewHolder, position: Int) {
-        val student = currentList[position]
-        holder.bindViews(student)
+        val item = currentList[position]
+        holder.bindViews(item)
     }
 
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<Student>() {
             override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem.studentUid == newItem.studentUid
+                return oldItem.userId == newItem.userId
             }
 
             override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {

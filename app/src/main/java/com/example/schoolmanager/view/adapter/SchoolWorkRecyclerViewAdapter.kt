@@ -16,13 +16,13 @@ class SchoolWorkRecyclerViewAdapter() :
     inner class SchoolWorksViewHolder(private val binding: ItemSchoolWorkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindViews(schoolWork: SchoolWork) {
+        fun bindViews(item: SchoolWork) {
             with(binding) {
-                schoolWorkTitleTextview.text = schoolWork.schoolWorkTitle
-                schoolWorkSimpleInfoTextview.text = schoolWork.schoolWorkSimpleInfo
-                totalScoreTextview.text = schoolWork.getTotalScore().toString()
+                schoolWorkTitleTextview.text = item.schoolWorkTitle
+                schoolWorkSimpleInfoTextview.text = item.schoolWorkSimpleInfo
+                totalScoreTextview.text = item.getTotalScore().toString()
                 root.setOnClickListener {
-                    itemClickListener?.let { it(schoolWork)}
+                    itemClickListener?.let { it(item)}
                 }
             }
         }

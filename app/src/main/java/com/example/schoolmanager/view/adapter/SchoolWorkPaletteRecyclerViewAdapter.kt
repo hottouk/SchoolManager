@@ -24,6 +24,7 @@ class SchoolWorkPaletteRecyclerViewAdapter :
         fun bindViews(schoolWork: SchoolWork) {
             binding.schoolworkTitlePaletteTextview.text = schoolWork.schoolWorkTitle
             binding.schoolWorkInfoPaletteTextview.text = schoolWork.schoolWorkSimpleInfo
+            binding.schoolworkScorePaletteTextview.text = schoolWork.getTotalScore().toString()
 
             binding.root.setOnClickListener {
                 applySelection(binding, schoolWork)
@@ -46,7 +47,7 @@ class SchoolWorkPaletteRecyclerViewAdapter :
     companion object {
         val differCallBack = object : DiffUtil.ItemCallback<SchoolWork>() {
             override fun areItemsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
-                return oldItem == newItem
+                return oldItem.schoolWorkTitle == newItem.schoolWorkTitle
             }
 
             override fun areContentsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
@@ -62,12 +63,12 @@ class SchoolWorkPaletteRecyclerViewAdapter :
             changeBackground(binding, R.color.white)
         } else {
             selectedSchoolWorks.add(schoolWork)
-            changeBackground(binding, R.color.teal_200) //색변경
+            changeBackground(binding, R.color.palette_selection) //색변경
         }
     }
 
     private fun changeBackground(binding: ItemSchoolWorkPaletteBinding, colorId: Int) {
-        binding.schoolworkPaletteContainer.setBackgroundColor(
+        binding.cardViewInnerCover.setBackgroundColor(
             ContextCompat.getColor(
                 binding.root.context,
                 colorId

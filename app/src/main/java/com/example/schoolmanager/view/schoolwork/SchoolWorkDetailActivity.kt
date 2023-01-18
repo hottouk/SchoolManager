@@ -21,7 +21,7 @@ class SchoolWorkDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivitySchoolWorkDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mSchoolWork = intent.getParcelableExtra<SchoolWork?>(KeyValue.INTENT_EXTRA_SCHOOL_WORK)
+        mSchoolWork = intent.getParcelableExtra(KeyValue.INTENT_EXTRA_SCHOOL_WORK)
         mSchoolWork?.let { bindViews(it) }
     }
 
@@ -78,7 +78,7 @@ class SchoolWorkDetailActivity : AppCompatActivity() {
             .show()
     }
 
-    //저장 확인 팝업
+    //삭제 확인 팝업
     private fun showDeletePopUp() {
         AlertDialog.Builder(this)
             .setTitle("삭제 확인")

@@ -6,7 +6,7 @@
         android:title="홈" />
 
     <item
-        android:id="@+id/student_manager_menu"
+        android:id="@+id/class_manager_menu"
         android:icon="@drawable/ic_student"
         android:title="학생관리" />
 
@@ -16,8 +16,7 @@
         android:title="활동관리" />
 
     <item
-        android:id="@+id/my_page_menu"
+        android:id="@+id/community_menu"
         android:icon="@drawable/ic_info"
-        android:title="내 정보" />
-
+        android:title="커뮤니티" />
 </menu>

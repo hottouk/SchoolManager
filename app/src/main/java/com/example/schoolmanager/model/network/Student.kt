@@ -9,30 +9,51 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Student(
-    @PrimaryKey val studentUid: String,
-    @ColumnInfo val studentNumber: Int,
-    @ColumnInfo val studentName: String,
-    @ColumnInfo val studentNickname: String,
-    @ColumnInfo val studentLevel: Int,
-    @ColumnInfo var studentExp: Long,
-    @ColumnInfo var studentDetailInfo: String,
+    @PrimaryKey val userId: String,
+    val userName: String? = "",
+    val userEmail: String? = "",
+    val userProfileImageUrl: String? = "",
+    val userClass: String = "",
     //회원정보
-    @ColumnInfo val studentEmail: String,
-    @ColumnInfo val studentPassword: String,
+    var studentNumber: String = "",
+    var studentNickname: String = "",
+    var studentLevel: Int = 1,
+    var studentDetailInfo: String = "",
+    var studentSimpleInfo: String = "",
+    var studentExp: Long = 0,
     //능력치
-    @ColumnInfo var leadership: Int,
-    @ColumnInfo var academicAbility: Int,
-    @ColumnInfo var cooperation: Int,
-    @ColumnInfo var sincerity: Int,
-    @ColumnInfo var career: Int
+    var leadership: Int = 0,
+    var academicAbility: Int = 0,
+    var cooperation: Int = 0,
+    var sincerity: Int = 0,
+    var career: Int = 0
 ) : Parcelable {
     constructor() : this(
-        "", 0, "", "",
-        1, 0, "",
-        "", "",
-        0, 0, 0, 0, 0
+        "", "", "", "", "",
+        "", "", 1, "", "",
+        0, 0, 0, 0, 0, 0
     )
-    fun getExp() : Long {
-        return (leadership + academicAbility + cooperation + sincerity + career).toLong()
+
+    fun getLevel():Int {
+        val currentExp = this.studentExp
+        var currentLevel = 1
+        when (currentExp) {
+            in 0 until 10 -> {
+                currentLevel = 2
+            }
+            in 10 until 50 -> {
+                currentLevel = 3
+            }
+            in 50 until 200 -> {
+                currentLevel = 4
+            }
+            in 200 until 500 -> {
+                currentLevel = 5
+            }
+            else -> {
+                currentLevel = 6
+            }
+        }
+        return currentLevel
     }
 }

@@ -90,7 +90,7 @@
             <TextView
                 android:id="@+id/leadership_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
 
             <TextView
                 android:layout_weight="1"
@@ -100,7 +100,7 @@
             <TextView
                 android:id="@+id/academic_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
         </TableRow>
 
         <TableRow android:layout_marginBottom="15dp">
@@ -113,7 +113,7 @@
             <TextView
                 android:id="@+id/cooperation_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
 
             <TextView
                 android:layout_weight="1"
@@ -123,7 +123,7 @@
             <TextView
                 android:id="@+id/career_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
         </TableRow>
 
         <TableRow>
@@ -136,7 +136,7 @@
             <TextView
                 android:id="@+id/sincerity_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
 
             <TextView
                 android:layout_weight="1"
@@ -146,7 +146,7 @@
             <TextView
                 android:id="@+id/sum_student_score_textview"
                 android:layout_weight="1"
-                android:text="10" />
+                android:text="@string/basic_score" />
         </TableRow>
     </TableLayout>
 

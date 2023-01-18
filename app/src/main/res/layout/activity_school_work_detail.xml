@@ -15,7 +15,7 @@
         android:paddingStart="8dp"
         android:paddingTop="4dp"
         android:text="@string/action_bar_title_work_edit"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/delete_btn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="5dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"

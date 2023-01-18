@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:text="@string/student_management"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +26,7 @@
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/teal_200"
         android:text="@string/give_experience"
+        android:enabled="true"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/action_bar"
         app:layout_constraintEnd_toEndOf="@id/action_bar"
@@ -50,6 +51,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/action_bar"
         tools:listitem="@layout/item_student" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cover_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.5"
+        android:background="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
     <Button
         android:id="@+id/selection_work_complete_btn"
@@ -99,19 +113,6 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/selected_students_textview"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="강건, 박성연, 김소연, 기타 등등" />
 
         <Button
             android:id="@+id/selection_student_complete_btn"

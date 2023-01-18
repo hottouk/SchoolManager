@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SchoolManager</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="give_experience">경험치 제공</string>
     <string name="student_management">학생 관리</string>
+    <string name="class_management">학급별 보기</string>
     <string name="school_work_title">활동 제목</string>
     <string name="school_work_simple_info">간단한 설명</string>
     <string name="ability_leadership">리더십</string>
@@ -23,5 +23,11 @@
     <string name="naver_client_id">TECojU6C7c5ePolWpAiZ</string>
     <string name="naver_client_secret">LQqJZwmnzi</string>
     <string name="naver_client_name">네이버아이디 로그인</string>
+    <string name="welcome_textview">선생님 환영합니다.</string>
+    <string name="open_class_btn">클래스 만들기</string>
+    <string name="basic_score">0</string>
+    <string name="under_construction">개발중인 페이지 입니다.</string>
+    <string name="current_class_number">5개의 클래스가 등록되어 있습니다.</string>
+    <string name="delete_class">삭제하기</string>
 
 </resources>
