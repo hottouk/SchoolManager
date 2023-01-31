@@ -26,7 +26,9 @@ data class Student(
     var academicAbility: Int = 0,
     var cooperation: Int = 0,
     var sincerity: Int = 0,
-    var career: Int = 0
+    var career: Int = 0,
+    //재화
+    var money : Int = 0
 ) : Parcelable {
     constructor() : this(
         "", "", "", "", "",
@@ -34,24 +36,24 @@ data class Student(
         0, 0, 0, 0, 0, 0
     )
 
-    fun getLevel():Int {
+    fun getLevel(): Int {
         val currentExp = this.studentExp
         var currentLevel = 1
         when (currentExp) {
-            in 0 until 10 -> {
+            in 0 until 25 -> {
+                currentLevel = 1
+            }
+            in 25 until 80 -> {
                 currentLevel = 2
             }
-            in 10 until 50 -> {
+            in 50 until 200 -> {
                 currentLevel = 3
             }
-            in 50 until 200 -> {
+            in 200 until 500 -> {
                 currentLevel = 4
             }
-            in 200 until 500 -> {
-                currentLevel = 5
-            }
             else -> {
-                currentLevel = 6
+                currentLevel = 5
             }
         }
         return currentLevel

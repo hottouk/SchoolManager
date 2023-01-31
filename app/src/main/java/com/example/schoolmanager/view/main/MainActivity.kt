@@ -5,19 +5,23 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.schoolmanager.R
-import com.example.schoolmanager.model.kakao.KakaoUserInfo
+import com.example.schoolmanager.databinding.ActivityMainBinding
 import com.example.schoolmanager.model.network.Teacher
 import com.example.schoolmanager.util.KeyValue
-import com.example.schoolmanager.view.MainViewModelFactory
 import com.example.schoolmanager.view.schoolwork.SchoolWorkManagerFragment
-import com.example.schoolmanager.view.student.StudentManagerFragment
+import com.example.schoolmanager.view.student.ClassManagerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    //뷰모델 구독
+    //뷰모델
     private lateinit var viewModel: MainViewModel
     private lateinit var viewModelFactory: MainViewModelFactory
 
+    //뷰
+    private var mBinding: ActivityMainBinding? = null
+    private val binding get() = mBinding!!
+
+    //프래그먼트
     private val classManagerFragment = ClassManagerFragment()
     private val schoolWorkManagerFragment = SchoolWorkManagerFragment()
     private val homeFragment = HomeFragment()
@@ -29,14 +33,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     //---------------------------------------------------------------------------------------생명주기
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initViews()
-        val user = intent.getParcelableExtra<KakaoUserInfo>(KeyValue.INTENT_EXTRA_USER_INFO)
+        val user = intent.getParcelableExtra<Teacher>(KeyValue.INTENT_EXTRA_USER_INFO)
         if (user != null) {
-            val currentUser = kakaoUserToTeacherUser(user)
-            viewModelFactory = MainViewModelFactory(currentUser) //main에서 viewModel로 값 전달
+            viewModelFactory = MainViewModelFactory(user) //main에서 viewModel로 값 전달
             viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         }
     }
@@ -59,21 +64,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     //프래그먼트 교체
-    fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .apply {
-                replace(R.id.fragment_container, fragment)
+                replace(R.id.main_fragment_container_view, fragment)
                 commit()
             }
-    }
-
-    //데이터 형식 변환
-    private fun kakaoUserToTeacherUser(kakaoUser: KakaoUserInfo): Teacher {
-        return Teacher(
-            userId = kakaoUser.userId,
-            userEmail = kakaoUser.userEmail,
-            userNickName = kakaoUser.userNickName,
-            userProfileImageUrl = kakaoUser.userProfileImageUrl
-        )
     }
 }

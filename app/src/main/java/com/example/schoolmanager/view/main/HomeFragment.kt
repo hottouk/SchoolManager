@@ -21,13 +21,15 @@ class HomeFragment : Fragment() {
     ): View? {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.forWhomTextview.text =
-            "${viewModel.currentUser.userNickName} ${getString(R.string.welcome_textview)}"
-        viewModel.fetchClassesInfo().observe(viewLifecycleOwner) {
+            "${viewModel.currentUser.userNickName} ${getString(R.string.home_welcome)}"
+        viewModel.fetchClassesList().observe(viewLifecycleOwner) {
             binding.numberOfClassTextview.text = "${it.size}개의 클래스가 등록되어 있습니다."
         }
-
         return binding.root
     }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()

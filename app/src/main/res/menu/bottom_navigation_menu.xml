@@ -3,20 +3,20 @@
     <item
         android:id="@+id/home_menu"
         android:icon="@drawable/ic_home"
-        android:title="홈" />
+        android:title="@string/menu_home" />
 
     <item
         android:id="@+id/class_manager_menu"
         android:icon="@drawable/ic_student"
-        android:title="학생관리" />
+        android:title="@string/menu_student" />
 
     <item
         android:id="@+id/schoolwork_manager_menu"
         android:icon="@drawable/ic_school_work"
-        android:title="활동관리" />
+        android:title="@string/menu_schoolWork" />
 
     <item
         android:id="@+id/community_menu"
         android:icon="@drawable/ic_info"
-        android:title="커뮤니티" />
+        android:title="@string/menu_community" />
 </menu>

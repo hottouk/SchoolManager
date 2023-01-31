@@ -2,7 +2,6 @@ package com.example.schoolmanager.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmanager.R
 import com.example.schoolmanager.databinding.ItemSchoolWorkPaletteBinding
 import com.example.schoolmanager.model.network.SchoolWork
+import com.example.schoolmanager.view.adapter.SchoolWorkRvAdapter.Companion.differCallBack
+import com.example.schoolmanager.view.student.StudentViewModel
 
-class SchoolWorkPaletteRecyclerViewAdapter :
-    ListAdapter<SchoolWork, SchoolWorkPaletteRecyclerViewAdapter.SchoolWorkPaletteHolder>(
+class SchoolWorkPaletteRvAdapter(val viewModel: StudentViewModel) :
+    ListAdapter<SchoolWork, SchoolWorkPaletteRvAdapter.SchoolWorkPaletteHolder>(
         differCallBack
     ) {
     private var onItemClickListener: ((SchoolWork) -> Unit)? = null //리스너
@@ -22,10 +23,10 @@ class SchoolWorkPaletteRecyclerViewAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindViews(schoolWork: SchoolWork) {
+            changeBackground(binding, R.color.white)
             binding.schoolworkTitlePaletteTextview.text = schoolWork.schoolWorkTitle
             binding.schoolWorkInfoPaletteTextview.text = schoolWork.schoolWorkSimpleInfo
             binding.schoolworkScorePaletteTextview.text = schoolWork.getTotalScore().toString()
-
             binding.root.setOnClickListener {
                 applySelection(binding, schoolWork)
                 onItemClickListener?.let { it(schoolWork) }
@@ -44,25 +45,16 @@ class SchoolWorkPaletteRecyclerViewAdapter :
         holder.bindViews(schoolWork)
     }
 
-    companion object {
-        val differCallBack = object : DiffUtil.ItemCallback<SchoolWork>() {
-            override fun areItemsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
-                return oldItem.schoolWorkTitle == newItem.schoolWorkTitle
-            }
-
-            override fun areContentsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 
     //다중 클릭 관련 부분
     private fun applySelection(binding: ItemSchoolWorkPaletteBinding, schoolWork: SchoolWork) {
         if (selectedSchoolWorks.contains(schoolWork)) {
             selectedSchoolWorks.remove(schoolWork)
+            viewModel.getSelectedSchoolWork(selectedSchoolWorks)
             changeBackground(binding, R.color.white)
         } else {
             selectedSchoolWorks.add(schoolWork)
+            viewModel.getSelectedSchoolWork(selectedSchoolWorks)
             changeBackground(binding, R.color.palette_selection) //색변경
         }
     }
@@ -80,8 +72,21 @@ class SchoolWorkPaletteRecyclerViewAdapter :
     fun setOnItemClickListener(listener: (SchoolWork) -> Unit) {
         onItemClickListener = listener
     }
-
     fun getNumberOfSelectedSchoolWorks() = selectedSchoolWorks.size
     fun getSelectedSchoolWorks() = selectedSchoolWorks
-    fun releaseSelection() = selectedSchoolWorks.clear()
+    fun releaseSelection(){
+        selectedSchoolWorks.clear()
+    }
+
+    companion object {
+        val differCallBack = object : DiffUtil.ItemCallback<SchoolWork>() {
+            override fun areItemsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
+                return oldItem.schoolWorkTitle == newItem.schoolWorkTitle
+            }
+
+            override fun areContentsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

@@ -17,14 +17,7 @@
         android:theme="@style/Theme.SchoolManager"
         tools:targetApi="31">
         <activity
-            android:name=".view.schoolwork.AddSchoolWork"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.intro.SignUpActivity"
+            android:name=".view.schoolwork.AddSchoolWorkActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -43,7 +36,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.student.StudentDetailActivity"
+            android:name=".view.student.StudentPetDetailFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

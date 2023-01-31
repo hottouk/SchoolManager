@@ -14,20 +14,12 @@
         android:gravity="center_vertical"
         android:paddingStart="8dp"
         android:paddingTop="4dp"
-        android:text="@string/action_bar_title_work_edit"
+        android:paddingEnd="8dp"
+        android:text="활동 수정"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/delete_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_delete"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -38,36 +30,121 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-    <TextView
-        android:id="@+id/school_work_title_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="4dp"
-        android:text="@string/school_work_title"
-        android:textSize="16sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/delete_btn"
+        android:layout_marginEnd="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
-
-
-    <EditText
-        android:id="@+id/school_work_simple_info_edittext"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/school_work_title_textview"
-        tools:text="간단한 생기부 설명이 입력되는 곳" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/school_work_info_area"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/table_layout"
+        android:id="@+id/school_work_info_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/difficulty_rating_area"
+        app:layout_constraintTop_toBottomOf="@id/action_bar">
+
+
+        <ImageView
+            android:id="@+id/image_picker"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_image_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/subject_textview"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/school_work_title_edit_textview"
+            app:layout_constraintStart_toEndOf="@id/image_picker"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="과목" />
+
+        <TextView
+            android:id="@+id/school_work_title_edit_textview"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/subject_textview"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목" />
+
+        <EditText
+            android:id="@+id/school_work_simpleInfo_edittext"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="활동 설명을 수정하세요."
+            app:layout_constraintBottom_toBottomOf="@id/image_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_picker"
+            app:layout_constraintTop_toBottomOf="@id/school_work_title_edit_textview" />
+
+        <EditText
+            android:id="@+id/school_work_detail_edit_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="활동 시 적어줄 개별 세특을 수정하세요"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_picker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/difficulty_rating_area"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/status_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/school_work_simple_info_edittext">
+        app:layout_constraintTop_toBottomOf="@id/school_work_info_area">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="예상 난이도를 수정하세요."
+            android:textSize="18sp" />
+
+        <RatingBar
+            android:id="@+id/expected_difficulty_rating"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="1"
+            android:stepSize="1" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/status_area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/school_work_edit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/difficulty_rating_area">
 
         <TextView
             android:id="@+id/score_label"
@@ -92,7 +169,7 @@
 
         <NumberPicker
             android:id="@+id/leadership_numberpicker"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:layout_constraintEnd_toStartOf="@id/academic_numberpicker"
@@ -111,7 +188,7 @@
 
         <NumberPicker
             android:id="@+id/academic_numberpicker"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
@@ -131,7 +208,7 @@
 
         <NumberPicker
             android:id="@+id/cooperation_numberpicker"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
@@ -151,7 +228,7 @@
 
         <NumberPicker
             android:id="@+id/sincerity_numberpicker"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
@@ -171,51 +248,44 @@
 
         <NumberPicker
             android:id="@+id/career_numberpicker"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/money_numberpicker"
             app:layout_constraintStart_toEndOf="@id/sincerity_numberpicker"
             app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
 
         <TextView
-            android:id="@+id/score_sum_textview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="right"
-            android:paddingVertical="2dp"
-            android:paddingRight="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:text="포인트"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/money_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/money_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/money_numberpicker" />
+
+        <NumberPicker
+            android:id="@+id/money_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:background="@color/palette_selection"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/academic_numberpicker"
-            tools:text="총점 : 25점" />
+            app:layout_constraintStart_toEndOf="@id/career_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <EditText
-        android:id="@+id/school_work_detail_info_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toTopOf="@id/edit_school_work_info_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table_layout"
-        tools:text="생기부 문구가 입력되는 곳" />
-
     <Button
-        android:id="@+id/edit_school_work_info_btn"
+        android:id="@+id/school_work_edit_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/teal_200"
-        android:text="@string/school_work_edit_info"
+        android:text="활동 수정"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

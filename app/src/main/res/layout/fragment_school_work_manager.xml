@@ -27,18 +27,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/school_work_list_recyclerview"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/subject_container"
+        android:name="com.example.schoolmanager.view.schoolwork.SubjectInnerFragment"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="5dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/action_bar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_school_work" />
+        tools:layout="@layout/fragment_inner_subject" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/school_work_container"
+        android:name="com.example.schoolmanager.view.schoolwork.SchoolWorkInnerFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subject_container"
+        tools:layout="@layout/fragment_inner_school_work" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plus_floating_btn"
@@ -48,5 +56,6 @@
         android:src="@drawable/ic_plus_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,73 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".view.intro.LogInActivity">
 
-    <EditText
-        android:id="@+id/email_edittext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="이메일"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/password_edittext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:hint="비밀번호"
-        android:padding="10dp"
-        android:paddingTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_edittext" />
-
-    <Button
-        android:id="@+id/login_btn"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/teal_200"
-        android:text="로그인"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/move_sign_up_page_btn"
-        app:layout_constraintTop_toBottomOf="@id/password_edittext" />
-
-    <Button
-        android:id="@+id/move_sign_up_page_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/teal_200"
-        android:text="회원가입"
-        android:textColor="@color/black"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/login_btn" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3">
+
+        <ImageView
+            android:id="@+id/logo_imageview"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_200"
+            android:padding="10dp"
+            android:src="@drawable/logo_mine" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <ImageView
         android:id="@+id/kakao_login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/kakao_login_medium_narrow"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/kakao_login_medium_wide"
+        app:layout_constraintBottom_toTopOf="@id/naver_login_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/naver_login_btn"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/btn_naver_complete"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/kakao_login_btn"
-        app:layout_constraintStart_toStartOf="@id/kakao_login_btn"
-        app:layout_constraintTop_toBottomOf="@id/kakao_login_btn" />
+        app:layout_constraintStart_toStartOf="@id/kakao_login_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

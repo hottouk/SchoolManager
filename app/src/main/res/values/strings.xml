@@ -23,11 +23,15 @@
     <string name="naver_client_id">TECojU6C7c5ePolWpAiZ</string>
     <string name="naver_client_secret">LQqJZwmnzi</string>
     <string name="naver_client_name">네이버아이디 로그인</string>
-    <string name="welcome_textview">선생님 환영합니다.</string>
     <string name="open_class_btn">클래스 만들기</string>
     <string name="basic_score">0</string>
     <string name="under_construction">개발중인 페이지 입니다.</string>
-    <string name="current_class_number">5개의 클래스가 등록되어 있습니다.</string>
+    <string name="home_welcome">선생님 환영합니다.</string>
+    <string name="home_number_of_class">5개의 클래스가 등록되어 있습니다.</string>
     <string name="delete_class">삭제하기</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_student">학생관리</string>
+    <string name="menu_schoolWork">활동관리</string>
+    <string name="menu_community">커뮤니티</string>
 
 </resources>
