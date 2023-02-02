@@ -27,6 +27,7 @@ class KeyValue {
         const val FRAG_BUNDLE_SUBJECT_KEY = "frag_to_frag_bundle_subject_key"
 
         const val PHOTO_PICKER_REQUEST_CODE = 1000
+        const val REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 2000
         val spinnerItems = arrayOf("국어", "영어", "수학", "사회", "과학")
     }
 }

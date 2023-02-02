@@ -1,13 +1,19 @@
 package com.example.schoolmanager.view.main
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.schoolmanager.R
 import com.example.schoolmanager.databinding.ActivityMainBinding
 import com.example.schoolmanager.model.network.Teacher
 import com.example.schoolmanager.util.KeyValue
+import com.example.schoolmanager.util.KeyValue.Companion.REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
 import com.example.schoolmanager.view.schoolwork.SchoolWorkManagerFragment
 import com.example.schoolmanager.view.student.ClassManagerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -61,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        requestWriteStoragePermission()
     }
 
     //프래그먼트 교체
@@ -70,5 +77,37 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.main_fragment_container_view, fragment)
                 commit()
             }
+    }
+
+    //외부저장소 권한 요청
+    private fun requestWriteStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { //구버젼일 경우
+            Toast.makeText(this, "권한 요청 성공", Toast.LENGTH_SHORT).show()
+        } else { //28이상의 버젼일 경우
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
+            )
+        }
+    }
+
+    //요청 결과
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        val writeExternalStoragePermissionGranted =
+            requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED
+
+        if (writeExternalStoragePermissionGranted) {
+            //권한 요청 성공시
+            Toast.makeText(this, "권한 요청 성공", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "권한이 거부되어 앱이 작동하지 않습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -2,6 +2,7 @@
     <string name="app_name">SchoolManager</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="give_experience">경험치 제공</string>
+    <string name="export_excel">엑셀 내보내기</string>
     <string name="student_management">학생 관리</string>
     <string name="class_management">학급별 보기</string>
     <string name="school_work_title">활동 제목</string>
