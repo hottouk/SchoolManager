@@ -13,7 +13,7 @@ import com.example.schoolmanager.util.KeyValue
 class SchoolWorkRvAdapter :
     ListAdapter<SchoolWork, SchoolWorkRvAdapter.SchoolWorkItemViewHolder>(differCallBack) {
 
-    var itemClickListener: ((SchoolWork) -> Unit)? = null
+    private var itemClickListener: ((SchoolWork) -> Unit)? = null
 
     inner class SchoolWorkItemViewHolder(private val binding: ItemSchoolWorkBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -67,6 +67,11 @@ class SchoolWorkRvAdapter :
         holder.bindViews(schoolWork)
     }
 
+    //외부 참조 함수
+    fun setOnItemClickListener(listener: (SchoolWork) -> Unit) {
+        itemClickListener = listener
+    }
+
     companion object {
         val differCallBack = object : DiffUtil.ItemCallback<SchoolWork>() {
             override fun areItemsTheSame(oldItem: SchoolWork, newItem: SchoolWork): Boolean {
@@ -77,11 +82,6 @@ class SchoolWorkRvAdapter :
                 return oldItem == newItem
             }
         }
-    }
-
-    //외부 참조 함수
-    fun setOnItemClickListener(listener: (SchoolWork) -> Unit) {
-        itemClickListener = listener
     }
 }
 

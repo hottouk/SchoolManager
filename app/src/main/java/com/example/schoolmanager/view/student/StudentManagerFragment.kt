@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import com.example.schoolmanager.*
 import com.example.schoolmanager.view.adapter.SchoolWorkPaletteRvAdapter
 import com.example.schoolmanager.databinding.FragmentStudentManagerBinding
@@ -52,8 +53,6 @@ class StudentManagerFragment : Fragment() {
             field = value
         }
 
-    private var mClassStudentPets: MutableList<Pet>? = null
-    private val classStudentPets get() = mClassStudentPets!!
 
     //뒤로가기
     private lateinit var callback: OnBackPressedCallback
@@ -84,20 +83,32 @@ class StudentManagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //선택 반 학생들, 학급활동 데이터 구독
         viewModel.selectedClass.observe(viewLifecycleOwner) { schoolClass -> //선택 반
             val classId = schoolClass.className
             viewModel.fetchMyStudentPetList(mainViewModel.currentUser.userId, classId)
                 .observe(viewLifecycleOwner) { classStudentPets -> //학생들
                     setStudentPetAdapter(classStudentPets) //어댑터 전달
-                    mClassStudentPets = classStudentPets //엑셀에 전달
                 }
             viewModel.fetchSchoolWorkList(mainViewModel.currentUser.userId, schoolClass.subject)
                 .observe(viewLifecycleOwner) { schoolWorks -> //학급활동들
                     setPaletteAdapter(schoolWorks) //팔레트 어댑터 전달
                 }
-            binding.actionBar.text = "${classId}반 학생 관리"
+            binding.actionBar.text = "${classId}반"
+        }
+        //엑셀 내보내기 모드 구독
+        viewModel.xlExportMode.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.exportExcelDialogContainer.visibility = View.VISIBLE
+                binding.dialogCoverLayout.visibility = View.VISIBLE
+                binding.giveExpBtn.isEnabled = false
+                binding.exportExcelBtn.isEnabled = false
+            } else {
+                binding.exportExcelDialogContainer.visibility = View.GONE
+                binding.dialogCoverLayout.visibility = View.GONE
+                binding.giveExpBtn.isEnabled = true
+                binding.exportExcelBtn.isEnabled = true
+            }
         }
     }
 
@@ -110,6 +121,7 @@ class StudentManagerFragment : Fragment() {
     override fun onDetach() { //뒤로가기
         super.onDetach()
         callback.remove()
+        viewModel.xlExportMode.value = false
     }
 
     //--------------------------------------------------------------------------------------사용자함수
@@ -127,10 +139,8 @@ class StudentManagerFragment : Fragment() {
             binding.coverLayout.visibility = View.INVISIBLE
         }
 
-        binding.exportExcelBtn.setOnClickListener { //엑셀 내보니개 버튼
-            viewModel.createExcelFile(classStudentPets)
-            viewModel.storeExcelInStorage(requireContext(), "xlFile")
-            viewModel.shareFile(requireContext(), "xlFile")
+        binding.exportExcelBtn.setOnClickListener { //엑셀 내보내기 버튼
+            viewModel.xlExportMode.value = true
         }
 
         showSelectedStudentsToText()

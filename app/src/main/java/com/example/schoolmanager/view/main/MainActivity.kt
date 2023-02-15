@@ -14,6 +14,7 @@ import com.example.schoolmanager.databinding.ActivityMainBinding
 import com.example.schoolmanager.model.network.Teacher
 import com.example.schoolmanager.util.KeyValue
 import com.example.schoolmanager.util.KeyValue.Companion.REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
+import com.example.schoolmanager.view.community.CommunityFragment
 import com.example.schoolmanager.view.schoolwork.SchoolWorkManagerFragment
 import com.example.schoolmanager.view.student.ClassManagerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -39,17 +40,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     //---------------------------------------------------------------------------------------생명주기
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initViews()
+        requestWriteStoragePermission()
         val user = intent.getParcelableExtra<Teacher>(KeyValue.INTENT_EXTRA_USER_INFO)
         if (user != null) {
             viewModelFactory = MainViewModelFactory(user) //main에서 viewModel로 값 전달
             viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         }
+        initViews()
     }
 
 
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     //뷰 초기화
     private fun initViews() {
         replaceFragment(homeFragment)
-
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_menu -> replaceFragment(homeFragment)
@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        requestWriteStoragePermission()
     }
 
     //프래그먼트 교체

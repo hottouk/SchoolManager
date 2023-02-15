@@ -2,13 +2,20 @@ package com.example.schoolmanager.util
 
 class KeyValue {
     companion object {
+        //DB
         const val DB_USERS = "Users"
         const val DB_TEACHER_USERS = "Teachers"
         const val DB_SCHOOL_ACTIVITIES = "Activities"
         const val DB_SCHOOL_CLASSES = "Classes"
         const val DB_PETS = "Pets"
+        const val DB_FAVORITES = "Favorites"
         const val DB_PARTICIPANTS = "IsParticipating"
         const val DB_PROPERTY_PET_IMG = "petUrlImage"
+
+        //SharedPref
+        const val SHARED_PREFERENCES = "sharedPref"
+        const val SHARED_PREF_USER_INFO = "sharedPrefUser"
+
 
         const val INTENT_EXTRA_STUDENT = "studentInfo"
         const val INTENT_EXTRA_SCHOOL_WORK = "itemActivity"

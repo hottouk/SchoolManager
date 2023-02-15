@@ -1,8 +1,11 @@
 package com.example.schoolmanager.view.intro
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -115,7 +118,7 @@ class LogInActivity : AppCompatActivity() {
                     fetchKakaoUserInfo()
                 }
             }
-        } else { //카카오톡이 없어 계정으로 로그인 시도
+        } else { //카카오톡이 없다면 계정으로 로그인 시도
             UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoLogincallback)
         }
     }
@@ -147,25 +150,26 @@ class LogInActivity : AppCompatActivity() {
             if (error != null) {
                 Toast.makeText(this, "카카오 사용자 정보를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             } else if (user != null) { // 사용자정보 요청 성공
-                val kakaoUserInfo = KakaoUserInfo(
+                viewModel.savedKakaoUserInfo = KakaoUserInfo( //뷰모델에 로그인 데이터 저장
                     userId = user.id.toString(),
                     userEmail = user.kakaoAccount?.email,
+                    user.kakaoAccount?.name,
                     userNickName = user.kakaoAccount?.profile?.nickname,
                     userProfileImageUrl = user.kakaoAccount?.profile?.thumbnailImageUrl
                 )
-                val teacherUser = viewModel.kakaoUserToTeacherUser(kakaoUserInfo)
+
                 viewModel.checkCurrentMember()
                 viewModel.isCurrentUser.observe(this@LogInActivity) {
                     if (it) { //기존유저
                         Log.d("로그인", "카카오 기존")
                         viewModel.setUpKakaoFlag() //카카오 아이디로 접속
-                        moveToMainPage(teacherUser)
+                        val teacherUser = viewModel.getUserInfoFromPref(binding)
+                        moveToMainPage(teacherUser!!)
                     } else { //신규유저
                         Log.d("로그인", "카카오 신규")
-                        viewModel.userToFirebase(teacherUser)
-                        viewModel.setUpFirstFlag() //처음 접속
                         viewModel.setUpKakaoFlag() //카카오 아이디로 접속
-                        moveToMainPage(teacherUser)
+                        viewModel.kakaoUserToTeacherUser()
+                        binding.signUpFragmentContainer.visibility = View.VISIBLE
                     }
                 }
             }
@@ -202,7 +206,7 @@ class LogInActivity : AppCompatActivity() {
                         moveToMainPage(teacherUser)
                     } else { //신규유저
                         Log.d("로그인", "네이버 신규")
-                        viewModel.userToFirebase(teacherUser)
+                        viewModel.userToFirebase()
                         viewModel.setUpFirstFlag() //처음 접속
                         viewModel.setUpNaverFlag() //네이버 아이디로 접속
                         moveToMainPage(teacherUser)

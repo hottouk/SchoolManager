@@ -5,53 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/action_bar"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:text="@string/student_management"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_bar_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/export_excel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/teal_200"
-        android:enabled="true"
-        android:text="@string/export_excel"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar"
-        app:layout_constraintEnd_toStartOf="@id/give_exp_btn"
-        app:layout_constraintTop_toTopOf="@id/action_bar" />
+        <TextView
+            android:id="@+id/action_bar"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:text="@string/student_management"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/give_exp_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/teal_200"
-        android:enabled="true"
-        android:text="@string/give_experience"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar"
-        app:layout_constraintEnd_toEndOf="@id/action_bar"
-        app:layout_constraintTop_toTopOf="@id/action_bar" />
+        <Button
+            android:id="@+id/export_excel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/teal_200"
+            android:enabled="true"
+            android:text="@string/export_excel"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/action_bar"
+            app:layout_constraintEnd_toStartOf="@id/give_exp_btn"
+            app:layout_constraintTop_toTopOf="@id/action_bar" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/student_list_recyclerview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/give_exp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/teal_200"
+            android:enabled="true"
+            android:text="@string/give_experience"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/action_bar"
+            app:layout_constraintEnd_toEndOf="@id/action_bar"
+            app:layout_constraintTop_toTopOf="@id/action_bar" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/student_list_recyclerview"
@@ -62,9 +69,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_area"
         tools:listitem="@layout/item_student_pet" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cover_layout"
@@ -76,7 +82,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        app:layout_constraintTop_toBottomOf="@id/action_bar_area"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/selection_work_complete_btn"
@@ -105,6 +112,8 @@
         tools:listitem="@layout/item_school_work_palette"
         tools:visibility="visible" />
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selected_students_dialogue_layout"
         android:layout_width="0dp"
@@ -116,11 +125,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
 
         <TextView
             android:id="@+id/selected_students_textview"
@@ -144,9 +148,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_cover_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="@color/black"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="1dp"
+        tools:visibility="visible" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/export_excel_dialog_container"
+        android:name="com.example.schoolmanager.view.student.XlExportDialogFragment"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_xl_export_dialog"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
