@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.community.BringOtherSchoolWorkFragment">
+
+    <TextView
+        android:id="@+id/action_bar"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="@color/teal_200"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:text="선생님의 활동"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+
+    <ImageView
+        android:id="@+id/delete_btn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toTopOf="@id/school_work_info_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/school_work_info_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/difficulty_rating_area"
+        app:layout_constraintTop_toBottomOf="@id/action_bar">
+
+
+        <ImageView
+            android:id="@+id/image_picker"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_image_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/subject_textview"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/school_work_title_edit_textview"
+            app:layout_constraintStart_toEndOf="@id/image_picker"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="과목" />
+
+        <TextView
+            android:id="@+id/school_work_title_edit_textview"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/subject_textview"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목" />
+
+        <TextView
+            android:id="@+id/school_work_simple_info_textview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_picker"
+            app:layout_constraintTop_toBottomOf="@id/school_work_title_edit_textview" />
+
+        <TextView
+            android:id="@+id/school_work_detail_edit_textview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_picker"
+            tools:text="동해물과백두산이마르고닳도록 하나님이 보우하사 우리 나라 만세" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/difficulty_rating_area"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/status_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/school_work_info_area">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="예상 난이도"
+            android:textSize="18sp" />
+
+        <RatingBar
+            android:id="@+id/expected_difficulty_rating"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="1"
+            android:stepSize="1" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/status_area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/bring_school_work_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/difficulty_rating_area">
+
+        <TextView
+            android:id="@+id/score_label"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="활동 점수"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ability_leadership"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/leadership_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/leadership_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/leadership_numberpicker" />
+
+        <TextView
+            android:id="@+id/leadership_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/academic_numberpicker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/score_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ability_academical"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/academic_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/academic_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/academic_numberpicker" />
+
+        <TextView
+            android:id="@+id/academic_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
+            app:layout_constraintEnd_toStartOf="@id/cooperation_numberpicker"
+            app:layout_constraintStart_toEndOf="@id/leadership_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ability_cooperation"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/cooperation_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/cooperation_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/cooperation_numberpicker" />
+
+        <TextView
+            android:id="@+id/cooperation_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
+            app:layout_constraintEnd_toStartOf="@id/sincerity_numberpicker"
+            app:layout_constraintStart_toEndOf="@id/academic_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ability_sincerity"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/sincerity_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/sincerity_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/sincerity_numberpicker" />
+
+        <TextView
+            android:id="@+id/sincerity_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
+            app:layout_constraintEnd_toStartOf="@id/career_numberpicker"
+            app:layout_constraintStart_toEndOf="@id/cooperation_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ability_career"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/career_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/career_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/career_numberpicker" />
+
+        <TextView
+            android:id="@+id/career_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
+            app:layout_constraintEnd_toStartOf="@id/money_numberpicker"
+            app:layout_constraintStart_toEndOf="@id/sincerity_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="포인트"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/money_numberpicker"
+            app:layout_constraintStart_toStartOf="@id/money_numberpicker"
+            app:layout_constraintTop_toBottomOf="@id/money_numberpicker" />
+
+        <TextView
+            android:id="@+id/money_numberpicker"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/palette_selection"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/leadership_numberpicker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/career_numberpicker"
+            app:layout_constraintTop_toTopOf="@id/leadership_numberpicker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/bring_school_work_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="활동 가져오기"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
